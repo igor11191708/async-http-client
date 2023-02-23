@@ -88,7 +88,6 @@ public struct Http{
         return request
     }
     
-    
     /// Check presents of the content type header
     /// - Parameters:
     ///   - session: URLSession
