@@ -34,7 +34,7 @@ Easy and lightweight network layer for creating different set of network request
 
 ### POST with Delegate collecting metrics
 ```swift
-    try await http.post(path: path, taskDelegate: TaskDelegate())
+    try await http.post(path: path, taskDelegate: DelegatePickingUpMetrics())
 ```
                  
 ### PUT
