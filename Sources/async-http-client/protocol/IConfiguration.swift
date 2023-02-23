@@ -4,6 +4,7 @@
 //
 //  Created by Igor on 22.02.2023.
 // https://github.com/apple/swift-evolution/blob/main/proposals/0302-concurrent-value-and-concurrent-closures.md
+// https://forums.swift.org/t/se-0302-second-review-sendable-and-sendable-closures/45253
 
 import Foundation
 
