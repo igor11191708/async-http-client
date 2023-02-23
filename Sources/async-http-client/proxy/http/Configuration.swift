@@ -10,7 +10,7 @@ import Foundation
 public extension Http{
     
     /// Configuration http client
-    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 6.0, *)
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     struct Configuration<R: IReader, W: IWriter>: IConfiguration{
                 
         /// Base url

@@ -9,7 +9,7 @@
 import Foundation
 
 /// ``Sendable`` - A type whose values can safely be passed across concurrency domains by copying
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 6.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol IConfiguration: Sendable{
     
     associatedtype Reader : IReader
