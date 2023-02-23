@@ -19,7 +19,8 @@ public extension Http{
         public var getSession: URLSession {
             session
         }
-        
+                
+        /// Default content type is request body exist and thre no content type header
         let defaultContentType : String = "application/json"
         
         /// Reader

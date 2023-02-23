@@ -6,9 +6,10 @@
 
 import Foundation
 
-
+/// Defines a response from the remoute source
 public protocol IResponse {
-    
+        
+    /// Raw data
     var data: Data { get }
 
 }
