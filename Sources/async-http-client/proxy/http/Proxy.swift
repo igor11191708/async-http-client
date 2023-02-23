@@ -11,7 +11,7 @@ public extension Http{
     
     /// Http client for creating requests to the server
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-    struct Proxy<R: IReader, W: IWriter>: IProxy{
+    actor Proxy<R: IReader, W: IWriter>: IProxy{
         
         /// An array of name-value pairs for a request
         public typealias Query = Http.Query
