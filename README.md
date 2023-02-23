@@ -1,6 +1,6 @@
 # Async/await http client using new concurrency model in Swift
 
-Easy and lightweight network layer for creating different set of network requests like GET, POST, PUT, DELETE etc customizable with coders
+Network layer for creating different set of network requests like GET, POST, PUT, DELETE etc customizable with coders
 
 ## Features
 - [x] Stand alone package without any dependencies using just Apple's  facilities
