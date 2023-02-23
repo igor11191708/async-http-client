@@ -74,11 +74,6 @@ To try it in the real environment. I suggest installing the basic NodeJS Express
 - Get [**WebStorm Early Access**](https://www.jetbrains.com/webstorm/nextversion)
 - Get [**index.js**](https://github.com/The-Igor/d3-network-service/blob/main/js/index.js) file from here and replace it with the one in the boilerplate and launch the server.
 
-### Real SwiftUI example
-[d3-rest-combine-swift-example](https://github.com/The-Igor/d3-rest-combine-swift-example)
-- Run server *NodeJS Express*
-- Run SwiftUI project
-
 ## Documentation(API)
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
 - Go to Product > Build Documentation or **⌃⇧⌘ D**
