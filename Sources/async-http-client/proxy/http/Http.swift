@@ -44,7 +44,7 @@ public struct Http{
     }
     
     
-    /// A URL load request buider method
+    /// A URL load request builder method
     /// - Parameters:
     ///   - config: Configuration
     ///   - path: Path

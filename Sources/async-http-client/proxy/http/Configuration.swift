@@ -60,7 +60,7 @@ public extension Http{
         ///   - reader: Reader
         ///   - writer: Writer
         ///   - baseURL: Base URL
-        ///   - sesssion: An object that coordinates a group of related, network data transfer tasks
+        ///   - session: An object that coordinates a group of related, network data transfer tasks
         public init(
             reader: R,
             writer: W,
