@@ -11,6 +11,7 @@ public protocol IProxy {
 
     associatedtype Config : IConfiguration
     
+    /// Configuration
     var config : Config { get }
     
 }
