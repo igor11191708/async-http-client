@@ -78,6 +78,6 @@ To try it in the real environment. I suggest installing the basic NodeJS Express
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
 - Go to Product > Build Documentation or **⌃⇧⌘ D**
 
-## SwiftUI example for package
+## SwiftUI example for the package
 
 [Async http client example](https://github.com/The-Igor/async-http-client-example)
