@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - Public
 
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 6.0, *)
 public extension Http.Proxy where  R == JsonReader, W == JsonWriter{
     
     /// Create proxy from base url

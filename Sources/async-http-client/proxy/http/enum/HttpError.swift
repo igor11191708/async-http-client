@@ -7,8 +7,8 @@
 
 import Foundation
 
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 6.0, *)
 enum HttpError: Error{
     
-    case contentTypeHeaderNotDefined
 }
 

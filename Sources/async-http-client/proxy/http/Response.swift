@@ -10,6 +10,7 @@ import Foundation
 public extension Http{
     
     /// The metadata associated with the response to a URL load request
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 6.0, *)
     struct Response<T> : IResponse{
         
         /// Instances of a data
