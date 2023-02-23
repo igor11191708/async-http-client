@@ -59,9 +59,6 @@ Network layer for creating different set of network requests like GET, POST, PUT
 ## Http requests
  ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
 
-## SwiftUI example for package
-
-[Async http client example](https://github.com/The-Igor/async-http-client-example)
 
 ## Try it in the real environment
 ### Simple server installation (mocking with NodeJS Express)
@@ -81,3 +78,7 @@ To try it in the real environment. I suggest installing the basic NodeJS Express
 ## Documentation(API)
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
 - Go to Product > Build Documentation or **⌃⇧⌘ D**
+
+## SwiftUI example for package
+
+[Async http client example](https://github.com/The-Igor/async-http-client-example)
