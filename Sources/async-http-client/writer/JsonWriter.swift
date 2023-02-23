@@ -11,8 +11,7 @@ import Foundation
 /// An object that encodes instances of a data type as JSON objects
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct JsonWriter: IWriter{
-    
-    
+        
     // MARK: - Life circle
     
     public init() { }
