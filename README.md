@@ -56,6 +56,9 @@ Network layer for creating different set of network requests like GET, POST, PUT
         -> Http.Response<T> where T : Decodable
 ```
 
+## Http requests
+ ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
+
 ## Try it in the real environment
 ### Simple server installation (mocking with NodeJS Express)
 
