@@ -24,13 +24,13 @@ Network layer for creating different set of network requests like GET, POST, PUT
 
 ### GET
 ```swift
-    try await http.get(path: path)
+    try await http.get(path: "users")
 ```        
 
 ### POST
 ```swift
     try await http.post(
-                        path: path, 
+                        path: "users", 
                         body: data, 
                         query: [("name", "Igor"), ("page","1")], 
                         headers: ["Content-Type": "application/json"])
@@ -38,17 +38,17 @@ Network layer for creating different set of network requests like GET, POST, PUT
 
 ### POST with Delegate collecting metrics
 ```swift
-    try await http.post(path: path, taskDelegate: DelegatePickingUpMetrics())
+    try await http.post(path: "users", taskDelegate: DelegatePickingUpMetrics())
 ```
                  
 ### PUT
 ```swift
-    try await http.put(path: path, body: data)
+    try await http.put(path: "users", body: data)
 ```
 
 ### DELETE
 ```swift
-    try await http.delete(path: path)
+    try await http.delete(path: "users")
 ```
 
 ### Custom request
