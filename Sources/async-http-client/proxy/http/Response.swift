@@ -20,14 +20,14 @@ public extension Http{
         public let data: Data
                 
         /// Response
-        public let urlRresponse: URLResponse
+        public let urlResponse: URLResponse
                 
         /// Request
         public let urlRequest: URLRequest
                 
         /// Status code
         public var statusCode: Int? {
-            (urlRresponse as? HTTPURLResponse)?.statusCode
+            (urlResponse as? HTTPURLResponse)?.statusCode
         }
         
         /// The metadata associated with the response to a URL load request
@@ -44,7 +44,7 @@ public extension Http{
         {
             self.value = value
             self.data = data
-            self.urlRresponse = urlRresponse
+            self.urlResponse = urlRresponse
             self.urlRequest = urlRequest
         }
         
