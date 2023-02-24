@@ -60,7 +60,13 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
         -> Http.Response<T> where T : Decodable
 ```
 
-## Http requests
+# The concept
+
+* Proxy is defining a communication layer. They are responsible for exchanging data with different data sources.
+* Reader is used to interpret data to be loaded into a Model instance
+ ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client/img/proxy.png) 
+ 
+
  ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
 
 
