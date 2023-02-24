@@ -64,7 +64,7 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 
 # The concept
 
-* Proxy is defining a communication layer. Proxy is responsible for exchanging data with different data sources.
+* Proxy is defining a communication layer. Proxy is responsible for exchanging data a data source. There might be Http proxy, File proxy etc or some flavours REST proxy, LongFile proxy.
 * Reader and Writer are used to interpret data.
 
  ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 
