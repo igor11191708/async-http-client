@@ -84,7 +84,7 @@ public struct Http{
                 request.setValue(content, forHTTPHeaderField: "Content-Type")
             }
         }
-        
+
         return request
     }
     
