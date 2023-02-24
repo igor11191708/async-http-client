@@ -14,6 +14,8 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 - [x] Based on interfaces not implementations
 - [x] Customizable with coders You can easily change format from json to xml or text just changing the coder
 
+ ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
+
 ## 1. Create
 ```swift
     let url = URL(string: "http://localhost:3000")
@@ -64,10 +66,11 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 
 * Proxy is defining a communication layer. They are responsible for exchanging data with different data sources.
 * Reader is used to interpret data to be loaded into a Model instance
+
  ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/proxy.png) 
  
 
- ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
+
 
 
 ## Try it in the real environment
