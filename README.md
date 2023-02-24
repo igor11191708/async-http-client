@@ -67,7 +67,7 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 * Proxy is defining a communication layer. They are responsible for exchanging data with different data sources.
 * Reader is used to interpret data to be loaded into a Model instance
 
- ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/proxy.png) 
+ ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 
  
 
 
