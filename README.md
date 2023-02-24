@@ -64,14 +64,11 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 
 # The concept
 
-* Proxy is defining a communication layer. They are responsible for exchanging data with different data sources.
-* Reader is used to interpret data to be loaded into a Model instance
+* Proxy is defining a communication layer. Proxy is responsible for exchanging data with different data sources.
+* Reader and Writer are used to interpret data.
 
  ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 
  
-
-
-
 
 ## Try it in the real environment
 ### Simple server installation (mocking with NodeJS Express)
