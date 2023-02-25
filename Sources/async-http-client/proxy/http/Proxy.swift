@@ -57,7 +57,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
-            body : Encodable? = nil,
+            body : IBody? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
             taskDelegate: URLSessionTaskDelegate? = nil
@@ -79,7 +79,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T>(
             path: String,
-            body : Encodable? = nil,
+            body : IBody? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
             taskDelegate: URLSessionTaskDelegate? = nil

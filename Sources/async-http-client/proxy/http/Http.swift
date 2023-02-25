@@ -92,7 +92,7 @@ public struct Http{
     /// - Parameters:
     ///   - session: URLSession
     ///   - request: URLRequest
-    /// - Returns: true - header is not empty
+    /// - Returns: true - content-type header is not empty
     static func hasNotContentType(_ session : URLSession,_ request : URLRequest) -> Bool{
         request.value(forHTTPHeaderField: "Content-Type") == nil &&
         session.configuration.httpAdditionalHeaders?["Content-Type"] == nil
