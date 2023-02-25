@@ -1,13 +1,13 @@
 # Async/await http client using new concurrency model in Swift
 
-Network layer for creating different requests like GET, POST, PUT, DELETE etc customizable with coders
+Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. Thre's ability to retry request with exponential backoff strategy if one fails.
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/async-http-client)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/async-http-client)
 
 ## Features
 - [x] Multiplatform
-- [x] Set up amount of attempts with **"Exponential backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries.
+- [x] Set up amount of attempts(retry) with **"Exponential backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries.
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in term of session
