@@ -115,7 +115,6 @@ public extension Http{
         /// - Parameters:
         ///   - request: A URL load request that is independent of protocol or URL scheme
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-        @discardableResult
         public func send<T>(
             with request : URLRequest,
             _ taskDelegate: ITaskDelegate? = nil) async throws

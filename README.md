@@ -58,7 +58,7 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 ```swift
         public func send<T>(
             with request : URLRequest,
-            _ taskDelegate: URLSessionTaskDelegate? = nil) async throws
+            _ taskDelegate: ITaskDelegate? = nil) async throws
         -> Http.Response<T> where T : Decodable
 ```
 
