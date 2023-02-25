@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ITaskDelegate.swift
 //  
 //
 //  Created by Igor on 25.02.2023.
@@ -7,6 +7,7 @@
 
 import Foundation
 
-public protocol ITaskDelegate: URLSessionTaskDelegate, Sendable{
+// A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+public protocol ITaskDelegate: URLSessionTaskDelegate{
     
 }
