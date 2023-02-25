@@ -12,7 +12,9 @@ public extension Http{
     /// Configuration http client
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     struct Configuration<R: IReader, W: IWriter>: IConfiguration, @unchecked Sendable{
-                
+
+        // MARK: - Config
+        
         /// Base url
         public var baseURL: URL
                
@@ -29,9 +31,13 @@ public extension Http{
                 
         /// Writer
         public let writer: W
-                
+              
+        // MARK: - Private properties
+        
         /// An object that coordinates a group of related, network data transfer task
         private let session : URLSession
+        
+        // MARK: - Life circle
         
         /// - Parameters:
         ///   - reader: Reader
@@ -77,6 +83,8 @@ public extension Http{
 public extension Http.Configuration where R == JsonReader, W == JsonWriter {
     
     /// Create configuration by base url
+    /// URLSession is URLSession.shared
+    ///  Reader amd Writer for Json format
     /// - Parameter baseURL: Base url
     init(baseURL: URL) {
         self.reader = JsonReader()

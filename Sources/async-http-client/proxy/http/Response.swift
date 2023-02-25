@@ -13,6 +13,13 @@ public extension Http{
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     struct Response<T> : IResponse, @unchecked Sendable{
         
+        /// Status code
+        public var statusCode: Int? {
+            (urlResponse as? HTTPURLResponse)?.statusCode
+        }
+        
+        // MARK: - Config
+        
         /// Instances of a data
         public let value: T
                 
@@ -24,11 +31,9 @@ public extension Http{
                 
         /// Request
         public let urlRequest: URLRequest
-                
-        /// Status code
-        public var statusCode: Int? {
-            (urlResponse as? HTTPURLResponse)?.statusCode
-        }
+
+        
+        // MARK: - Life circle
         
         /// The metadata associated with the response to a URL load request
         /// - Parameters:
