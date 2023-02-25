@@ -45,7 +45,6 @@ public extension Http{
             reader: R,
             writer: W,
             baseURL: URL,
-            
             sessionConfiguration: URLSessionConfiguration,
             delegate: URLSessionDelegate? = nil,
             delegateQueue queue: OperationQueue? = nil
