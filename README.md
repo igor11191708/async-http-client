@@ -7,7 +7,7 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 
 ## Features
 - [x] Multiplatform
-- [x] Set up amount of attempts if request fails with "Exponential backoff  strategy". Exponential backoff is a strategy in which you increase the delays between retries.
+- [x] Set up amount of attempts with **"Exponential backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries.
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in term of session
