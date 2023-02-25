@@ -34,11 +34,13 @@ public extension Http{
         ///   - path: Path
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
+        ///   - retry: Amount of attempts Default value is 1
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func get<T>(
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
+            retry : Int = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -46,7 +48,7 @@ public extension Http{
             
             let request = try buildURLRequest(for: path, query: query, headers: headers)
             
-            return try await send(with: request, taskDelegate)
+            return try await send(with: request, retry: retry, taskDelegate)
         }
         
         /// POST request
@@ -55,19 +57,21 @@ public extension Http{
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
+        ///   - retry: Amount of attempts Default value is 1
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
             body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
+            retry : Int = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .post, query: query, body: body, headers: headers)
             
-            return try await send(with: request, taskDelegate)
+            return try await send(with: request, retry: retry, taskDelegate)
         }
         
         
@@ -77,19 +81,21 @@ public extension Http{
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
+        ///   - retry: Amount of attempts Default value is 1
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T>(
             path: String,
             body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
+            retry : Int = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .put, query: query, body: body, headers: headers)
             
-            return try await send(with: request, taskDelegate)
+            return try await send(with: request, retry: retry, taskDelegate)
         }
         
         /// DELETE request
@@ -97,35 +103,38 @@ public extension Http{
         ///   - path: Path
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
+        ///   - retry: Amount of attempts Default value is 1
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func delete<T>(
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
+            retry : Int = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .delete, query: query, headers: headers)
             
-            return try await send(with: request, taskDelegate)
+            return try await send(with: request, retry: retry, taskDelegate)
         }
         
         
         /// Send custom request based on the specific request instance
         /// - Parameters:
         ///   - request: A URL load request that is independent of protocol or URL scheme
+        ///   - retry: Amount of attempts Default value is 1
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func send<T>(
             with request : URLRequest,
-            _ taskDelegate: ITaskDelegate? = nil) async throws
-        -> Http.Response<T> where T : Decodable
+            retry : Int = 1,
+            _ taskDelegate: ITaskDelegate? = nil
+        ) async throws -> Http.Response<T> where T : Decodable
         {
             
-            let cfg = config
-            let reader = cfg.reader
+            let reader = config.reader
             
-            let (data,response) = try await cfg.getSession.data(for: request, delegate: taskDelegate)
+            let (data,response) = try await sendRetry(with: request, retry: retry, taskDelegate)
             
             let value: T = try reader.read(data: data)
             
@@ -138,6 +147,40 @@ public extension Http{
 // MARK: - Private
 
 private extension Http.Proxy{
+    
+    /// - Parameters:
+    ///   - request: A URL load request that is independent of protocol or URL scheme
+    ///   - retry: Amount of attempts Default value is 1
+    ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+    func sendRetry(
+        with request : URLRequest,
+        retry : Int,
+        _ taskDelegate: ITaskDelegate? = nil
+    ) async throws -> (Data, URLResponse)
+    {
+        guard retry < 0 else { throw HttpProxyError.RetryMustBePositive }
+        
+        let sesstion = config.getSession
+        var nextDelay: UInt64 = 1
+        
+        if retry > 1{
+            for i in 1...retry-1{
+                do{
+                    return try await sesstion.data(for: request, delegate: taskDelegate)
+                }catch{
+                    #if DEBUG
+                    print("retry \(i)")
+                    #endif
+                }
+                
+                try? await Task.sleep(nanoseconds: 1_000_000_000 * nextDelay)
+                
+                nextDelay *= 2
+            }
+        }
+        
+        return try await sesstion.data(for: request, delegate: taskDelegate)
+    }
     
     /// Url builder method
     /// - Parameters:

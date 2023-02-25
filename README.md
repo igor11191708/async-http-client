@@ -7,6 +7,7 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 
 ## Features
 - [x] Multiplatform
+- [x] Set up amount of attempts if request fails with "Exponential backoff  strategy". Exponential backoff is a strategy in which you increase the delays between retries.
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in term of session
@@ -28,6 +29,11 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 ```swift
     try await http.get(path: "users")
 ```        
+
+### GET with retry
+```swift
+    try await http.get(path: "users", retry  : 5)
+```    
 
 ### POST
 ```swift
@@ -56,10 +62,14 @@ Network layer for creating different requests like GET, POST, PUT, DELETE etc cu
 ### Custom request
 
 ```swift
-        public func send<T>(
-            with request : URLRequest,
-            _ taskDelegate: ITaskDelegate? = nil) async throws
-        -> Http.Response<T> where T : Decodable
+    /// - Parameters:
+    ///   - request: A URL load request that is independent of protocol or URL scheme
+    ///   - retry: Amount of attempts Default value is 1
+    ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+    func sendRetry(
+        with request : URLRequest,
+        retry : Int,
+        _ taskDelegate: ITaskDelegate? = nil
 ```
 
 # The concept
