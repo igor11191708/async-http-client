@@ -1,5 +1,5 @@
 //
-//  Proxy.swift
+//  IProxy.swift
 //
 //  Created by Igor Shelopaev on 28.04.2021.
 //

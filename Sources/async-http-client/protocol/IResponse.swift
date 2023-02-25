@@ -1,5 +1,5 @@
 //
-//  Response.swift
+//  IResponse.swift
 //
 //  Created by Igor Shelopaev on 29.04.2021.
 //
