@@ -11,13 +11,13 @@ public extension Http{
     
     /// Http client for creating requests to the server
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-    struct Proxy<R: IReader, W: IWriter>: IProxy{
+    struct Proxy<R: IReader, W: IWriter>: IProxy, @unchecked Sendable{
         
         /// An array of name-value pairs for a request
-        public typealias Query = Http.Query
+        public typealias Query = [(String, String?)]
         
         /// A dictionary containing all of the HTTP header fields for a request
-        public typealias Headers = Http.Headers
+        public typealias Headers = [String: String]
         
         /// Configuration
         public let config : Configuration<R,W>
@@ -144,7 +144,7 @@ private extension Http.Proxy{
     ///   - path: Path
     ///   - query: An array of name-value pairs
     /// - Returns: A value that identifies the location of a resource
-    func buildURL(baseURL: URL, for path: String, query : Http.Query? = nil) throws -> URL{
+    func buildURL(baseURL: URL, for path: String, query : Query? = nil) throws -> URL{
         
         guard let url = URL(string: path, relativeTo: baseURL)else{
             throw URLError(.badURL)

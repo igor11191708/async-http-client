@@ -11,11 +11,7 @@ import Foundation
 /// Name space and set of helpers for http async client
 public struct Http{
 
-    /// An array of name-value pairs for a request
-    public typealias Query = [(String, String?)]
-    
-    /// A dictionary containing all of the HTTP header fields for a request
-    public typealias Headers = [String: String]    
+
     
 
 }
