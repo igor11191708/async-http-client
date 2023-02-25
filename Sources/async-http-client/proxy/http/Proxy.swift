@@ -38,7 +38,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            taskDelegate: URLSessionTaskDelegate? = nil
+            taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
@@ -57,10 +57,10 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
-            body : IBody? = nil,
+            body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            taskDelegate: URLSessionTaskDelegate? = nil
+            taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
@@ -79,10 +79,10 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T>(
             path: String,
-            body : IBody? = nil,
+            body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            taskDelegate: URLSessionTaskDelegate? = nil
+            taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
@@ -101,7 +101,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            taskDelegate: URLSessionTaskDelegate? = nil
+            taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
@@ -118,7 +118,7 @@ public extension Http{
         @discardableResult
         public func send<T>(
             with request : URLRequest,
-            _ taskDelegate: URLSessionTaskDelegate? = nil) async throws
+            _ taskDelegate: ITaskDelegate? = nil) async throws
         -> Http.Response<T> where T : Decodable
         {
             
