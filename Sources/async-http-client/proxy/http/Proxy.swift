@@ -154,7 +154,7 @@ private extension Http.Proxy{
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
     func sendRetry(
         with request : URLRequest,
-        retry : Int,
+        retry : Int = 1,
         _ taskDelegate: ITaskDelegate? = nil
     ) async throws -> (Data, URLResponse)
     {
