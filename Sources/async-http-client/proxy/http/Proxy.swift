@@ -10,6 +10,7 @@ import Foundation
 public extension Http{
     
     /// Http client for creating requests to the server
+    /// Proxy does not keep any state It's just a transport layer to get and pass data
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     struct Proxy<R: IReader, W: IWriter>: IProxy, @unchecked Sendable{
         
@@ -48,7 +49,7 @@ public extension Http{
             return try await send(with: request, taskDelegate)
         }
         
-        /// POST requst
+        /// POST request
         /// - Parameters:
         ///   - path: Path
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
@@ -70,7 +71,7 @@ public extension Http{
         }
         
         
-        /// PUT requst
+        /// PUT request
         /// - Parameters:
         ///   - path: Path
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
@@ -138,7 +139,7 @@ public extension Http{
 
 private extension Http.Proxy{
     
-    /// Url buider method
+    /// Url builder method
     /// - Parameters:
     ///   - baseURL: Base url
     ///   - path: Path
