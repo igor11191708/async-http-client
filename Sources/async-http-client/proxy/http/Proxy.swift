@@ -197,7 +197,7 @@ private extension Http.Proxy{
             
             if hasNotContentType(config.getSession, request){
                 let content = config.defaultContentType
-                request.setValue(content, forHTTPHeaderField: "Content-Type")
+                request.setValue(content, forHTTPHeaderField: "Content-Type") // for PUT
             }
         }
 
