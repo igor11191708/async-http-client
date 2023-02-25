@@ -9,6 +9,6 @@ import Foundation
 
 enum HttpProxyError : Error{
     
-    case RetryMustBePositive
+    case RetryMustBeBiggerThenZero
     
 }

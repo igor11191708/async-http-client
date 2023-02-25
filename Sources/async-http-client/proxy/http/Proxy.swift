@@ -158,7 +158,7 @@ private extension Http.Proxy{
         _ taskDelegate: ITaskDelegate? = nil
     ) async throws -> (Data, URLResponse)
     {
-        guard retry > -1 else { throw HttpProxyError.RetryMustBePositive }
+        guard retry > 0 else { throw HttpProxyError.RetryMustBeBiggerThenZero }
         
         let sesstion = config.getSession
         var nextDelay: UInt64 = 1
