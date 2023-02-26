@@ -7,8 +7,8 @@
 
 import Foundation
 
+/// Set of errors
 enum HttpProxyError : Error{
     
-    case RetryMustBeBiggerThenZero
     
 }

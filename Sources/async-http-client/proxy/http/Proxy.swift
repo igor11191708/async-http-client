@@ -40,7 +40,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : Int = 1,
+            retry : UInt = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -64,7 +64,7 @@ public extension Http{
             body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : Int = 1,
+            retry : UInt = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -88,7 +88,7 @@ public extension Http{
             body : Encodable? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : Int = 1,
+            retry : UInt = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -109,7 +109,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : Int = 1,
+            retry : UInt = 1,
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -127,7 +127,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func send<T>(
             with request : URLRequest,
-            retry : Int = 1,
+            retry : UInt = 1,
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
         {
@@ -154,32 +154,33 @@ private extension Http.Proxy{
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
     func sendRetry(
         with request : URLRequest,
-        retry : Int = 1,
+        retry : UInt = 1,
         _ taskDelegate: ITaskDelegate? = nil
     ) async throws -> (Data, URLResponse)
     {
-        guard retry > 0 else { throw HttpProxyError.RetryMustBeBiggerThenZero }
         
-        let sesstion = config.getSession
-        var nextDelay: UInt64 = 1
-        
+        let session = config.getSession
+        var nextDelay: UInt64 = 1       
+print(retry)
         if retry > 1{
-            for i in 1...retry-1{
+            let limit = retry - 1
+            for i in 1...limit{
                 do{
-                    return try await sesstion.data(for: request, delegate: taskDelegate)
+                    return try await session.data(for: request, delegate: taskDelegate)
                 }catch{
                     #if DEBUG
                     print("retry \(i)")
                     #endif
                 }
-                
+                // nanoseconds the only choice for iOS15
                 try? await Task.sleep(nanoseconds: 1_000_000_000 * nextDelay)
                 
                 nextDelay *= 2
             }
         }
-        
-        return try await sesstion.data(for: request, delegate: taskDelegate)
+                
+        /// one more time to let the error to propagate if it fails the last time
+        return try await session.data(for: request, delegate: taskDelegate)
     }
     
     /// Url builder method
