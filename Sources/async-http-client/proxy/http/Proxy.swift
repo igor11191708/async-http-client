@@ -161,7 +161,7 @@ private extension Http.Proxy{
         
         let session = config.getSession
         var nextDelay: UInt64 = 1       
-print(retry)
+
         if retry > 1{
             let limit = retry - 1
             for i in 1...limit{
