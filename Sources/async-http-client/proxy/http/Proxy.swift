@@ -163,8 +163,8 @@ private extension Http.Proxy{
         var nextDelay: UInt64 = 1       
 
         if retry > 1{
-            let limit = retry - 1
-            for i in 1...limit{
+            let up = retry - 1
+            for i in 1...up{
                 do{
                     return try await session.data(for: request, delegate: taskDelegate)
                 }catch{
