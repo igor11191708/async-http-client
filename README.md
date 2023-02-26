@@ -66,7 +66,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
     ///   - request: A URL load request that is independent of protocol or URL scheme
     ///   - retry: Amount of attempts Default value is 1
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-    func sendRetry(
+    func send(
         with request : URLRequest,
         retry : UInt = 1,
         _ taskDelegate: ITaskDelegate? = nil
