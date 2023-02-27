@@ -11,7 +11,7 @@ public extension Http{
     
     /// The metadata associated with the response to a URL load request
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-    struct Response<T> : IResponse, @unchecked Sendable{
+    struct Response<T: Sendable> : IResponse, Sendable{
         
         /// Status code
         public var statusCode: Int? {
