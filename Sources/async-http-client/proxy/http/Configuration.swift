@@ -19,6 +19,7 @@ public extension Http{
         public var baseURL: URL
                
         /// Get session
+        /// @unchecked Sendable
         public var getSession: URLSession {
             session
         }
@@ -35,6 +36,7 @@ public extension Http{
         // MARK: - Private properties
         
         /// An object that coordinates a group of related, network data transfer task
+        /// @unchecked Sendable
         private let session : URLSession
         
         // MARK: - Life circle
