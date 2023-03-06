@@ -62,16 +62,16 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 ### Custom request
 
 ```swift
-        /// Send custom request based on the specific request instance
-        /// - Parameters:
-        ///   - request: A URL load request that is independent of protocol or URL scheme
-        ///   - retry: ``RetryService.Strategy`` Default value .exponential with 5 retry and duration 2.0
-        ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-        public func send<T>(
-            with request : URLRequest,
-            retry strategy : RetryService.Strategy = .exponential(retry: 5, duration: 2.0),
-            _ taskDelegate: ITaskDelegate? = nil
-        ) async throws -> Http.Response<T> where T : Decodable
+    /// Send custom request based on the specific request instance
+    /// - Parameters:
+    ///   - request: A URL load request that is independent of protocol or URL scheme
+    ///   - retry: ``RetryService.Strategy`` Default value .exponential with 5 retry and duration 2.0
+    ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+    public func send<T>(
+        with request : URLRequest,
+        retry strategy : RetryService.Strategy = .exponential(retry: 5, duration: 2.0),
+        _ taskDelegate: ITaskDelegate? = nil
+    ) async throws -> Http.Response<T> where T : Decodable
 ```
 
 ## Retry strategy
