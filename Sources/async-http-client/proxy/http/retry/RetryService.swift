@@ -18,7 +18,6 @@ public struct RetryService: Equatable, Sequence{
     /// Default service
     static let `default` = RetryService(strategy: .exponential())
     
-    
     /// - Parameter strategy: Retry strategy ``RetryService.Strategy``
     public init(strategy: Strategy){
         self.strategy = strategy
