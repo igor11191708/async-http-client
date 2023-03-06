@@ -65,7 +65,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
     /// Send custom request based on the specific request instance
     /// - Parameters:
     ///   - request: A URL load request that is independent of protocol or URL scheme
-    ///   - retry: ``RetryService.Strategy`` Default value .exponential with 5 retry and duration 2.0
+    ///   - retry: ``RetryService.Strategy`` Default value .exponential with 5 retry and duration 2.0 sec
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
     public func send<T>(
         with request : URLRequest,
