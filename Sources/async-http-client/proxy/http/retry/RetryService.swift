@@ -13,8 +13,7 @@ import Foundation
 public struct RetryService: Equatable, Sequence{
         
     /// Retry strategy
-    public let strategy: Strategy
-       
+    public let strategy: Strategy       
     
     /// Default service
     static let `default` = RetryService(strategy: .exponential())

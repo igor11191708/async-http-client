@@ -25,7 +25,6 @@ public extension RetryService{
             duration: TimeInterval = 2.0
         )
         
-        
         /// Max amount of retries
         var maximumRetries: UInt{
             switch self{
