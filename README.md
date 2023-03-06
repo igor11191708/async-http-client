@@ -69,7 +69,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func send<T>(
             with request : URLRequest,
-            retry strategy : RetryService.Strategy = .exponential(),
+            retry strategy : RetryService.Strategy = .exponential(retry: 5, duration: 2.0),
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
 ```
