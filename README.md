@@ -10,7 +10,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Set up amount of attempts(retry) with **"Exponential backoff"** or **"Constant backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries. Constant backoff is a strategy when delay between retries is a constant value
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
-- [x] Customizable in term of URLSession
+- [x] Customizable in terms of URLSession
 - [x] Customizable in terms of URLSessionTaskDelegate, URLSessionDelegate
 - [x] Based on interfaces not implementations
 - [x] Customizable with coders You can easily change format from json to xml or text just changing the coder
