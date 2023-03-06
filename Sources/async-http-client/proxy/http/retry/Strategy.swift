@@ -13,7 +13,7 @@ public extension RetryService{
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     enum Strategy: Hashable {
         
-        /// constant delay between reties
+        /// constant delay between retries
         case constant(
             retry : UInt = 5,
             duration: TimeInterval = 2.0
