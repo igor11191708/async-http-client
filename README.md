@@ -8,7 +8,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 ## Features
 - [x] Multiplatform
 - [x] Stand alone package without any dependencies using just Apple's  facilities
-- [x] Set up amount of attempts(retry) with **"Exponential backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries.
+- [x] Set up amount of attempts(retry) with **"Exponential backoff"** or **"Constant backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries. Constant backoff is a strategy when delay between retries is a constant value
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in term of URLSession
 - [x] Customizable in terms of URLSessionTaskDelegate, URLSessionDelegate
@@ -62,19 +62,29 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 ### Custom request
 
 ```swift
-    /// - Parameters:
-    ///   - request: A URL load request that is independent of protocol or URL scheme
-    ///   - retry: Amount of attempts Default value is 1
-    ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-    func send(
-        with request : URLRequest,
-        retry : UInt = 1,
-        _ taskDelegate: ITaskDelegate? = nil
+        /// Send custom request based on the specific request instance
+        /// - Parameters:
+        ///   - request: A URL load request that is independent of protocol or URL scheme
+        ///   - retry: ``RetryService.Strategy`` strategy Default value .exponential with 5 retry and duration 2.0
+        ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+        public func send<T>(
+            with request : URLRequest,
+            retry strategy : RetryService.Strategy = .exponential(),
+            _ taskDelegate: ITaskDelegate? = nil
+        ) async throws -> Http.Response<T> where T : Decodable
 ```
+
+## Retry strategy
+
+| type | description |
+| --- | --- |
+| constant | The strategy implements constant backoff  |
+| exponential | The strategy implements exponential backoff  |
+
 
 # The concept
 
-* Proxy is defining a communication layer and responsible for exchanging data with data source. There might be Http proxy, File proxy etc or some flavours REST proxy, LongFile proxy.
+* Proxy is defining a communication layer and responsible for exchanging data with data source. There might be Http proxy, File proxy etc or some flavors REST proxy, LongFile proxy.
 * Reader and Writer are used to interpret data.
 
  ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 

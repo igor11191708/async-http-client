@@ -34,7 +34,7 @@ public extension Http{
         ///   - path: Path
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
-        ///   - retry: Amount of attempts Default value is 1
+        ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func get<T>(
             path: String,
@@ -47,8 +47,9 @@ public extension Http{
         {
             
             let request = try buildURLRequest(for: path, query: query, headers: headers)
+            let strategy = RetryService.Strategy.exponential(retry: retry, duration: 2)
             
-            return try await send(with: request, retry: retry, taskDelegate)
+            return try await send(with: request, retry: strategy, taskDelegate)
         }
         
         /// POST request
@@ -57,7 +58,7 @@ public extension Http{
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
-        ///   - retry: Amount of attempts Default value is 1
+        ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
@@ -70,8 +71,9 @@ public extension Http{
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .post, query: query, body: body, headers: headers)
+            let strategy = RetryService.Strategy.exponential(retry: retry)
             
-            return try await send(with: request, retry: retry, taskDelegate)
+            return try await send(with: request, retry: strategy, taskDelegate)
         }
         
         
@@ -81,7 +83,7 @@ public extension Http{
         ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
-        ///   - retry: Amount of attempts Default value is 1
+        ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T>(
             path: String,
@@ -94,8 +96,9 @@ public extension Http{
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .put, query: query, body: body, headers: headers)
+            let strategy = RetryService.Strategy.exponential(retry: retry)
             
-            return try await send(with: request, retry: retry, taskDelegate)
+            return try await send(with: request, retry: strategy, taskDelegate)
         }
         
         /// DELETE request
@@ -103,7 +106,7 @@ public extension Http{
         ///   - path: Path
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
-        ///   - retry: Amount of attempts Default value is 1
+        ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func delete<T>(
             path: String,
@@ -115,26 +118,30 @@ public extension Http{
         -> Http.Response<T> where T: Decodable
         {
             let request = try buildURLRequest(for: path, method: .delete, query: query, headers: headers)
-            
-            return try await send(with: request, retry: retry, taskDelegate)
+            let strategy = RetryService.Strategy.exponential(retry: retry)
+            return try await send(with: request, retry: strategy, taskDelegate)
         }
         
         
         /// Send custom request based on the specific request instance
         /// - Parameters:
         ///   - request: A URL load request that is independent of protocol or URL scheme
-        ///   - retry: Amount of attempts Default value is 1
+        ///   - retry: ``RetryService.Strategy`` strategy Default value .exponential with 5 retry and duration 2.0
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func send<T>(
             with request : URLRequest,
-            retry : UInt = 1,
+            retry strategy : RetryService.Strategy = .exponential(),
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
         {
             
             let reader = config.reader
             
-            let (data,response) = try await sendRetry(with: request, retry: retry, taskDelegate)
+            let (data,response) = try await sendRetry(
+                with: request,
+                retry: strategy,
+                taskDelegate
+            )
             
             let value: T = try reader.read(data: data)
             
@@ -150,35 +157,35 @@ private extension Http.Proxy{
     
     /// - Parameters:
     ///   - request: A URL load request that is independent of protocol or URL scheme
-    ///   - retry: Amount of attempts Default value is 1
+    ///   - retry: ``RetryService`` strategy
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
     func sendRetry(
         with request : URLRequest,
-        retry : UInt = 1,
+        retry strategy : RetryService.Strategy,
         _ taskDelegate: ITaskDelegate? = nil
     ) async throws -> (Data, URLResponse)
     {
         
         let session = config.getSession
-        var nextDelay: UInt64 = 1       
+        let service = RetryService(strategy: strategy)
 
-        if retry > 1{
-            let up = retry - 1
-            for i in 1...up{
-                do{
-                    return try await session.data(for: request, delegate: taskDelegate)
-                }catch{
-                    #if DEBUG
-                    print("retry \(i)")
-                    #endif
-                }
-                // nanoseconds the only choice for iOS15
-                try? await Task.sleep(nanoseconds: 1_000_000_000 * nextDelay)
-                
-                nextDelay *= 2
+        for delay in service{
+            do{
+                print(delay)
+                return try await session.data(for: request, delegate: taskDelegate)
+            }catch{
+                #if DEBUG
+                print("retry send \(delay)")
+                #endif
             }
+            
+            try? await Task.sleep(nanoseconds: 1_000_000_000 * UInt64(delay))
         }
-                
+
+        #if DEBUG
+        print("retry send last")
+        #endif
+        
         /// one more time to let the error to propagate if it fails the last time
         return try await session.data(for: request, delegate: taskDelegate)
     }
