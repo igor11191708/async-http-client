@@ -5,7 +5,7 @@
 //
 
 import Foundation
-
+import retry_policy_service
 
 public extension Http{
     
@@ -47,7 +47,7 @@ public extension Http{
         {
             
             let request = try buildURLRequest(for: path, query: query, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry, duration: 2)
+            let strategy = RetryService.Strategy.exponential(retry: retry)
             
             return try await send(with: request, retry: strategy, taskDelegate)
         }
@@ -169,9 +169,8 @@ private extension Http.Proxy{
         let session = config.getSession
         let service = RetryService(strategy: strategy)
 
-        for delay in service{
+        for delay in service.dropLast(){
             do{
-                print(delay)
                 return try await session.data(for: request, delegate: taskDelegate)
             }catch{
                 #if DEBUG
@@ -179,7 +178,7 @@ private extension Http.Proxy{
                 #endif
             }
             
-            try? await Task.sleep(nanoseconds: 1_000_000_000 * UInt64(delay))
+            try? await Task.sleep(nanoseconds: delay)
         }
 
         #if DEBUG

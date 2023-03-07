@@ -79,8 +79,9 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 | type | description |
 | --- | --- |
 | constant | The strategy implements constant backoff  |
-| exponential | The strategy implements exponential backoff  |
+| exponential [default] | The strategy implements exponential backoff  |
 
+for more details [retry service](https://github.com/The-Igor/retry-policy-service)
 
 # The concept
 
