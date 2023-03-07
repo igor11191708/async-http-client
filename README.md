@@ -69,19 +69,21 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
     ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
     public func send<T>(
         with request : URLRequest,
-        retry strategy : RetryService.Strategy = .exponential(retry: 5, duration: 2.0),
+        retry strategy : RetryService.Strategy,
         _ taskDelegate: ITaskDelegate? = nil
     ) async throws -> Http.Response<T> where T : Decodable
 ```
 
 ## Retry strategy
 
+This package uses stand alone package providing retry policy. The service creates sequence of the delays (nanoseconds) according to chosen strategy for more details foloe the link [retry service](https://github.com/The-Igor/retry-policy-service) 
+
 | type | description |
 | --- | --- |
 | constant | The strategy implements constant backoff  |
 | exponential [default] | The strategy implements exponential backoff  |
 
-for more details [retry service](https://github.com/The-Igor/retry-policy-service)
+
 
 # The concept
 
