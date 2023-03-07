@@ -1,6 +1,6 @@
 # Async/await http client using new concurrency model in Swift
 
-Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. Thre's ability to retry request with exponential backoff strategy if one fails.
+Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. Thre's ability to retry request with different strategies
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/async-http-client)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/async-http-client)
