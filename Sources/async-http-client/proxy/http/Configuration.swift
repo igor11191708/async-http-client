@@ -46,9 +46,8 @@ public extension Http{
         ///   - writer: Writer
         ///   - baseURL: Base URL
         ///   - sessionConfiguration: A configuration object that defines behavior and policies for a URL session
-        ///   - sessionDelegate: A protocol that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes
+        ///   - delegate: A protocol that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes
         ///   - queue: A queue that regulates the execution of operations
-        ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public init(
             reader: R,
             writer: W,
@@ -93,5 +92,22 @@ public extension Http.Configuration where R == JsonReader, W == JsonWriter {
         self.writer = JsonWriter()
         self.baseURL = baseURL
         self.session = URLSession.shared
+    }
+    
+    /// - Parameters:
+    ///   - baseURL: Base URL
+    ///   - sessionConfiguration: A configuration object that defines behavior and policies for a URL session
+    ///   - delegate: A protocol that defines methods that URL session instances call on their delegates to handle session-level events, like session life cycle changes
+    ///   - queue: A queue that regulates the execution of operations
+    init(
+        baseURL: URL,
+         sessionConfiguration: URLSessionConfiguration,
+         delegate: URLSessionDelegate? = nil,
+         delegateQueue queue: OperationQueue? = nil
+    ) {
+        self.reader = JsonReader()
+        self.writer = JsonWriter()
+        self.baseURL = baseURL
+        self.session = URLSession(configuration: sessionConfiguration, delegate: delegate, delegateQueue: queue)
     }
 }

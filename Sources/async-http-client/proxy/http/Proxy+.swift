@@ -17,5 +17,6 @@ public extension Http.Proxy where  R == JsonReader, W == JsonWriter{
     init(baseURL: URL){
         let config =  Http.Configuration<R,W>(baseURL: baseURL)
         self.init(config: config)
-    }
+    }      
+
 }
