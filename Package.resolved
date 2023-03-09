@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "retry-policy-service",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/The-Igor/retry-policy-service.git",
+      "state" : {
+        "revision" : "46ded002161a95c6b08ddd02c3f319891c773d14",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

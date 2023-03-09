@@ -182,7 +182,7 @@ private extension Http.Proxy{
         }
 
         #if DEBUG
-        print("retry send last")
+        //print("retry send last")
         #endif
         
         /// one more time to let the error to propagate if it fails the last time
