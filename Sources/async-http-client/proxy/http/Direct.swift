@@ -11,6 +11,15 @@ import retry_policy_service
 public extension Http{
     
     struct Get{
+        
+        /// Get request
+        /// - Parameters:
+        ///   - url: Url
+        ///   - query: Query set
+        ///   - headers: Additional headers
+        ///   - retry: Amount of attempts is request is fail
+        ///   - taskDelegate: URLSessionTaskDelegate
+        /// - Returns: Data and URLResponse
         public static func from(
             _ url : URL,
             query : Http.Query? = nil,
@@ -26,6 +35,14 @@ public extension Http{
     }
     
     struct Post{
+        /// Post request
+        /// - Parameters:
+        ///   - url: Url
+        ///   - query: Query set
+        ///   - headers: Additional headers
+        ///   - retry: Amount of attempts is request is fail
+        ///   - taskDelegate: URLSessionTaskDelegate
+        /// - Returns: Data and URLResponse
         public static func from(
             _ url : URL,
             query : Http.Query? = nil,
@@ -42,6 +59,14 @@ public extension Http{
     }
     
     struct Put{
+        /// Put request
+        /// - Parameters:
+        ///   - url: Url
+        ///   - query: Query set
+        ///   - headers: Additional headers
+        ///   - retry: Amount of attempts is request is fail
+        ///   - taskDelegate: URLSessionTaskDelegate
+        /// - Returns: Data and URLResponse
         public static func from(
             _ url : URL,
             query : Http.Query? = nil,
@@ -58,6 +83,14 @@ public extension Http{
     }
     
     struct Delete{
+        /// Delete
+        /// - Parameters:
+        ///   - url: Url
+        ///   - query: Query set
+        ///   - headers: Additional headers
+        ///   - retry: Amount of attempts is request is fail
+        ///   - taskDelegate: URLSessionTaskDelegate
+        /// - Returns: Data and URLResponse
         public static func from(
             _ url : URL,
             query : Http.Query? = nil,
