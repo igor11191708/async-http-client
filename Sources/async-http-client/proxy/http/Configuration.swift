@@ -37,7 +37,7 @@ public extension Http{
         
         /// An object that coordinates a group of related, network data transfer task
         /// @unchecked Sendable
-        private let session : URLSession
+        public let session : URLSession
         
         // MARK: - Life circle
         
