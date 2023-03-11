@@ -1,6 +1,6 @@
 # Async/await http client using new concurrency model in Swift
 
-Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. Thre's ability to retry request with different strategies
+Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. There's ability to retry request with different strategies
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/async-http-client)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/async-http-client)
@@ -119,7 +119,7 @@ This package uses stand alone package providing retry policy. The service create
 
 To try it in the real environment. I suggest installing the basic NodeJS Express boilerplate. Take a look on the video snippet how easy it is to get it through Webstorm that is accessible for free for a trial period.
 
-[![Server instalation (NodeJS Express)](https://github.com/The-Igor/d3-network-service/blob/main/img/server_install.png)](https://youtu.be/9FPOYHzcE7A)
+[![Server installation (NodeJS Express)](https://github.com/The-Igor/d3-network-service/blob/main/img/server_install.png)](https://youtu.be/9FPOYHzcE7A)
 
 - Get [**WebStorm Early Access**](https://www.jetbrains.com/webstorm/nextversion)
 - Get [**index.js**](https://github.com/The-Igor/d3-network-service/blob/main/js/index.js) file from here and replace it with the one in the boilerplate and launch the server.
@@ -131,3 +131,8 @@ To try it in the real environment. I suggest installing the basic NodeJS Express
 ## SwiftUI example for the package
 
 [Async http client example](https://github.com/The-Igor/async-http-client-example)
+
+## Used by packages
+
+[Replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift)
+There's an example how to use it with a custom JSONReader and processing a custom response Error format
