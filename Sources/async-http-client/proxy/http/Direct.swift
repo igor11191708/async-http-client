@@ -21,7 +21,7 @@ public extension Http{
             let request = try buildURLRequest(for: url, query: query, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
             
-           return try await sendRetry(with: request, retry: strategy)
+           return try await sendRetry(with: request, retry: strategy, taskDelegate)
         }
     }
     
@@ -37,7 +37,7 @@ public extension Http{
             let request = try buildURLRequest(for: url, method: .post, query: query, body: body, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
 
-           return try await sendRetry(with: request, retry: strategy)
+           return try await sendRetry(with: request, retry: strategy, taskDelegate)
         }
     }
     
@@ -53,7 +53,7 @@ public extension Http{
             let request = try buildURLRequest(for: url, method: .put, query: query, body: body, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
             
-           return try await sendRetry(with: request, retry: strategy)
+           return try await sendRetry(with: request, retry: strategy, taskDelegate)
         }
     }
     
@@ -68,7 +68,7 @@ public extension Http{
             let request = try buildURLRequest(for: url, method: .delete, query: query, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
             
-           return try await sendRetry(with: request, retry: strategy)
+           return try await sendRetry(with: request, retry: strategy, taskDelegate)
         }
     }
 }

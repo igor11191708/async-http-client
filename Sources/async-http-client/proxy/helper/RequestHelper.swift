@@ -16,7 +16,7 @@ import Foundation
 ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
 ///   - headers: A dictionary containing all of the HTTP header fields for a request
 /// - Returns: A URL load request
-func buildURLRequest(
+internal func buildURLRequest(
     _ baseURL : URL,
     for path: String,
     method : Http.Method = .get,
@@ -54,7 +54,7 @@ func buildURLRequest(
 ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
 ///   - headers: A dictionary containing all of the HTTP header fields for a request
 /// - Returns: A URL load request
-func buildURLRequest(
+internal func buildURLRequest(
     for url : URL,
     method : Http.Method = .get,
     query : Http.Query? = nil,

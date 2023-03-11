@@ -12,7 +12,7 @@ import retry_policy_service
 ///   - request: A URL load request that is independent of protocol or URL scheme
 ///   - retry: ``RetryService`` strategy
 ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-func sendRetry(
+internal func sendRetry(
     with request : URLRequest,
     retry strategy : RetryService.Strategy,
     _ taskDelegate: ITaskDelegate? = nil,
