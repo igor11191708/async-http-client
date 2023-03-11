@@ -17,6 +17,26 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 
  ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
 
+## Fast track
+
+## 1. Use
+```swift
+   try await Http.Get.from(url, retry: 5)
+```
+```swift
+   try await Http.Post.from(url, taskDelegate : TaskDelegate())
+```
+
+```swift
+   try await Http.Put.from(url, body: data)
+```
+
+```swift
+   try await Http.Delete.from(url)
+```
+
+## Extended track
+
 ## 1. Create
 ```swift
     let url = URL(string: "http://localhost:3000")
