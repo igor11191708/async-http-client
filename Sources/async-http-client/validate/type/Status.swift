@@ -25,6 +25,9 @@ public extension Http.Validate{
     }
 }
 
+
+// MARK: - Life circle
+
 /// A type that can be initialized with an integer literal.
 extension Http.Validate.Status: ExpressibleByIntegerLiteral {
     /// Creates an instance initialized to the specified integer value.
@@ -32,6 +35,8 @@ extension Http.Validate.Status: ExpressibleByIntegerLiteral {
        self = .const(value)
     }
 }
+
+    // MARK: - API
 
 public extension Http.Validate.Status{
     
