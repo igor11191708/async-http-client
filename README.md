@@ -128,7 +128,7 @@ Currently is implemented for status code. You can pass to the validate array dif
 | type | description |
 | --- | --- |
 | const(Int) [default] 200 | Validate by exact value  |
-| range(Range<Int>) | Validate by range  |
+| range(Range<Int>) [default] 200..<300 | Validate by range  |
 | predicate(Predicate) | Validate by predicate func if you need some specific precessing logic |
 
 #### By range
