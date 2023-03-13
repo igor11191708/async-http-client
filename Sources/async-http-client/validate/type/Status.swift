@@ -47,16 +47,26 @@ public extension Http.Validate.Status{
 
 // MARK: - Public
 
+/// Validate status
+/// - Parameters:
+///   - response: URLResponse
+///   - validate: Set of func to validate status code
+/// - Throws: Http.Errors.status(response)
+public func validateStatus(_ response : URLResponse, by rule : Http.Validate.Status) throws{
+    
+    try rule.validate(response)
+}
+
 
 /// Validate status
 /// - Parameters:
 ///   - response: URLResponse
 ///   - validate: Set of func to validate status code
 /// - Throws: Http.Errors.status(response)
-public func validateStatus(_ response : URLResponse, by validate : [Http.Validate.Status]) throws{
+public func validateStatus(_ response : URLResponse, by rules : [Http.Validate.Status]) throws{
     
-    try validate.forEach{
-        try $0.validate(response)
+    try rules.forEach{
+        try validateStatus(response, by: $0)
     }
 }
 
