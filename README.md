@@ -111,7 +111,7 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
         public func send<T>(
             with request : URLRequest,
             retry strategy : RetryService.Strategy = .exponential(),
-            _ validate : [Http.Validate] = [.status(.const(200))],
+            _ validate : [Http.Validate] = [.status(200)],
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
 ```
