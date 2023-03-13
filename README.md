@@ -53,6 +53,17 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
     let http = Http.Proxy(baseURL: url)
 ```
 
+### with custom configuration
+```swift
+      let cfg = Http.Configuration(
+                    reader: SomeJsonReader(),
+                    writer: SomeJsonWriter(),
+                    baseURL: baseURL,
+                    session: session)
+     let http = Http.Proxy(config: cfg)
+```
+
+
 ## 2. Use
 
 ### GET
