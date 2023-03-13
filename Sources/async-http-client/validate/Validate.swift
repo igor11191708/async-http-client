@@ -9,9 +9,9 @@ import Foundation
 
 public extension Http{
     
-    /// Set of validate cases for Http client
+    /// Set of validate rules for Http client
     enum Validate {
-        /// Set of validate cases for  URLResponse  status
+        /// Set of validate rules for  HTTPURLResponse.statusCode
         case status(Status)
     }
 }

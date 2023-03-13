@@ -29,7 +29,7 @@ public extension Http.Validate{
 public extension Http.Validate.Status{
     
     /// Validate status
-    /// - Parameter data: Response
+    /// - Parameter data: URLResponse
     func validate(_ data : URLResponse) throws{
         
         guard let status = (data as? HTTPURLResponse)?.statusCode else{ return try err(nil, data) }
