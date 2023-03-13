@@ -9,9 +9,9 @@ import Foundation
 
 public extension Http{
     
-    /// Set of validate rules for Http client
+    /// Set of  rules for validating  Http client
     enum Validate {
-        /// Set of validate rules for  HTTPURLResponse.statusCode
+        /// Set of  rules for validating  HTTPURLResponse.statusCode
         case status(Status)
     }
 }
@@ -19,7 +19,7 @@ public extension Http{
 internal extension Http.Validate{
     
     /// Pick up status validate rule
-    var isStatus : Status{
+    var pickStatusRule : Status{
         switch(self){
             case .status(let rule) : return rule
         }
@@ -29,10 +29,10 @@ internal extension Http.Validate{
 
 internal extension Collection where Element == Http.Validate{
     
-    /// Pick up status validate rules
-    /// - Returns: Set of fn to validate status
-    func filterStatus() -> [Http.Validate.Status] {
-        map{ $0.isStatus }
+    /// Pick up  rules for validating  HTTPURLResponse.statusCode
+    /// - Returns: Collection of rules for validating  statusCode
+    func pickStatusRules() -> [Http.Validate.Status] {
+        map{ $0.pickStatusRule }
     }
 }
 
