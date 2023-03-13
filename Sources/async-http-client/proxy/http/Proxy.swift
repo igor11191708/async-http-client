@@ -201,6 +201,7 @@ public extension Http{
     }
 }
 
+// MARK: - File private
 
 /// Check presents of the content type header
 /// - Parameters:

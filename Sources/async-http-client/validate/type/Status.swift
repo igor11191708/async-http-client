@@ -10,7 +10,8 @@ import Foundation
 public extension Http.Validate{
     
     /// Set of validate cases for Response status code
-    enum Status{
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    enum Status: IValidate{
         
         public typealias Predicate = (Int) -> Bool
         
@@ -64,6 +65,7 @@ public extension Http.Validate.Status{
 ///   - response: URLResponse
 ///   - validate: Set of func to validate status code
 /// - Throws: Http.Errors.status(response)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public func validateStatus(_ response : URLResponse, by rule : Http.Validate.Status) throws{
     
     try rule.validate(response)
@@ -75,6 +77,7 @@ public func validateStatus(_ response : URLResponse, by rule : Http.Validate.Sta
 ///   - response: URLResponse
 ///   - validate: Set of func to validate status code
 /// - Throws: Http.Errors.status(response)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public func validateStatus(_ response : URLResponse, by rules : [Http.Validate.Status]) throws{
     
     try rules.forEach{
