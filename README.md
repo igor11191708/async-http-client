@@ -2,7 +2,7 @@
 
 Network layer for running requests like GET, POST, PUT, DELETE etc customizable with coders. There's ability to retry request with different strategies
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/async-http-client)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2;;-http-client%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/async-http-client)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fasync-http-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/async-http-client)
 
 ## Features
@@ -129,7 +129,7 @@ Currently is implemented for validating status code.
 | --- | --- |
 | const(Int) [default] 200 | Validate by exact value  |
 | range(Range<Int>) [default] 200..<300 | Validate by range  |
-| predicate(Predicate) | Validate by predicate func if you need some specific precessing logic |
+| predicate(Predicate) | Validate by predicate func if you need some specific processing logic |
 
 #### By range
 ```swift
