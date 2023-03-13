@@ -35,12 +35,14 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func get<T>(
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
+            validate : [Http.Validate] = [.status(.const(200))],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -51,7 +53,7 @@ public extension Http{
                 for: path, query: query, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
             
-            return try await send(with: request, retry: strategy, taskDelegate)
+            return try await send(with: request, retry: strategy, validate, taskDelegate)
         }
         
         /// POST request
@@ -60,12 +62,14 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
+            validate : [Http.Validate] = [.status(.const(200))],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -73,7 +77,7 @@ public extension Http{
             let request = try buildURLRequest(config.baseURL,
                 for: path, method: .post, query: query, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
-            return try await send(with: request, retry: strategy, taskDelegate)
+            return try await send(with: request, retry: strategy, validate, taskDelegate)
         }
         
         /// POST request
@@ -83,6 +87,7 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T, V : Encodable>(
             path: String,
@@ -90,6 +95,7 @@ public extension Http{
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
+            validate : [Http.Validate] = [.status(.const(200))],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -101,7 +107,7 @@ public extension Http{
             let strategy = RetryService.Strategy.exponential(retry: retry)
 
             
-            return try await send(with: request, retry: strategy, taskDelegate)
+            return try await send(with: request, retry: strategy, validate, taskDelegate)
         }
         
         /// PUT request
@@ -111,6 +117,7 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T, V : Encodable>(
             path: String,
@@ -118,6 +125,7 @@ public extension Http{
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
+            validate : [Http.Validate] = [.status(.const(200))],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -133,7 +141,7 @@ public extension Http{
                 request.setValue(content, forHTTPHeaderField: "Content-Type") // for PUT
             }
             
-            return try await send(with: request, retry: strategy, taskDelegate)
+            return try await send(with: request, retry: strategy, validate, taskDelegate)
         }
         
         /// DELETE request
@@ -142,12 +150,14 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func delete<T>(
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
+            validate : [Http.Validate] = [.status(.range(200..<300))],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -156,17 +166,19 @@ public extension Http{
                 config.baseURL,
                 for: path, method: .delete, query: query, headers: headers)
             let strategy = RetryService.Strategy.exponential(retry: retry)
-            return try await send(with: request, retry: strategy, taskDelegate)
+            return try await send(with: request, retry: strategy, validate, taskDelegate)
         }
         
         /// Send custom request based on the specific request instance
         /// - Parameters:
         ///   - request: A URL load request that is independent of protocol or URL scheme
         ///   - retry: ``RetryService.Strategy`` strategy Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set up diff combinations check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func send<T>(
             with request : URLRequest,
             retry strategy : RetryService.Strategy = .exponential(),
+            _ validate : [Http.Validate] = [.status(.const(200))],
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
         {
@@ -179,6 +191,8 @@ public extension Http{
                 taskDelegate,
                 config.getSession
             )
+            
+            try validateStatus(response, by : validate.filterStatus())
             
             let value: T = try reader.read(data: data)
             
@@ -197,3 +211,4 @@ fileprivate func hasNotContentType(_ session : URLSession,_ request : URLRequest
     request.value(forHTTPHeaderField: "Content-Type") == nil &&
     session.configuration.httpAdditionalHeaders?["Content-Type"] == nil
 }
+

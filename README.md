@@ -7,9 +7,10 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 
 ## Features
 - [x] Multiplatform
-- [x] You have fasttrack functions to make requests immediately by url or build the infrastructure configuration that suits you
+- [x] You have fast-track functions to make requests immediately by url or build the infrastructure configuration that suits you
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Set up amount of attempts(retry) with **"Exponential backoff"** or **"Constant backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries. Constant backoff is a strategy when delay between retries is a constant value
+- [x] Different strategies to validate Data or URLResponse
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in terms of URLSession
 - [x] Customizable in terms of URLSessionTaskDelegate, URLSessionDelegate
@@ -36,6 +37,13 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
    try await Http.Delete.from(url)
 ```
 
+Fast-track functions return **(Data, URLResponse)** if you need to validate statusCode you can use Check yout different trategies **Http.Validate.Status** to validate status code
+
+```swift
+    /// - Throws: Http.Errors.status(response)
+    public func validateStatus(_ response : URLResponse, by validate : [Http.Validate.Status]) throws
+```
+
 ## Extended track
 
 ## 1. Create
@@ -54,6 +62,11 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 ### GET with retry
 ```swift
     try await http.get(path: "users", retry  : 5)
+``` 
+
+### GET with validate status code 200..<300
+```swift
+    try await http.get(path: "users", validate: [.status(.range(200..<300))])
 ```    
 
 ### POST
@@ -83,16 +96,18 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 ### Custom request
 
 ```swift
-    /// Send custom request based on the specific request instance
-    /// - Parameters:
-    ///   - request: A URL load request that is independent of protocol or URL scheme
-    ///   - retry: ``RetryService.Strategy`` Default value .exponential with 5 retry and duration 2.0 sec
-    ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
-    public func send<T>(
-        with request : URLRequest,
-        retry strategy : RetryService.Strategy,
-        _ taskDelegate: ITaskDelegate? = nil
-    ) async throws -> Http.Response<T> where T : Decodable
+        /// Send custom request based on the specific request instance
+        /// - Parameters:
+        ///   - request: A URL load request that is independent of protocol or URL scheme
+        ///   - retry: ``RetryService.Strategy`` strategy Default value .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set up diff combinations check out ``Http.Validate.Status``
+        ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+        public func send<T>(
+            with request : URLRequest,
+            retry strategy : RetryService.Strategy = .exponential(),
+            _ validate : [Http.Validate] = [.status(.const(200))],
+            _ taskDelegate: ITaskDelegate? = nil
+        ) async throws -> Http.Response<T> where T : Decodable
 ```
 
 ## Retry strategy
@@ -104,7 +119,31 @@ This package uses stand alone package providing retry policy. The service create
 | constant | The strategy implements constant backoff  |
 | exponential [default] | The strategy implements exponential backoff  |
 
+## Validate
+Is an array of different rules to check Data or URLResponse.
+Currently is implemented for status code. You can pass to the validate array different combinations to validate like for status code 200 and 202..<205
 
+### Status code
+| type | description |
+| --- | --- |
+| const(Int) [default] 200 | Validate by exact value  |
+| range(Range<Int>) | Validate by range  |
+| predicate(Predicate) | Validate by predicate func if you need some specific precessing logic |
+
+#### By range
+```swift
+
+    try await http.get(path: path, validate: [.status(.range(200..<300))])
+
+```
+
+#### By predicate
+```swift
+
+    let fn : (Int) -> Bool = { status in status == 201 }
+    
+    try await http.get(path: path, validate: [.status(.predicate(fn))])
+```
 
 # The concept
 
