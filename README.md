@@ -56,8 +56,8 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
 ### with custom configuration
 ```swift
       let cfg = Http.Configuration(
-                    reader: SomeJsonReader(),
-                    writer: SomeJsonWriter(),
+                    reader: SomeReader(),
+                    writer: SomeWriter(),
                     baseURL: baseURL,
                     session: session)
      let http = Http.Proxy(config: cfg)
