@@ -15,10 +15,10 @@ public extension Http.Validate{
         public typealias Predicate = (Int) -> Bool
         
         /// Validate by exact value
-        case const(Int)
+        case const(Int = 200)
         
         /// Validate by range
-        case range(Range<Int>)
+        case range(Range<Int> = 200..<300)
         
         /// Validate by predicate func if you need some specific logic
         case predicate(Predicate)

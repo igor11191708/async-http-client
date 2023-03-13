@@ -95,7 +95,7 @@ public extension Http{
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
-            validate : [Http.Validate] = [.status(.const(200))],
+            validate : [Http.Validate] = [.status(.const())], /// default 200
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -125,7 +125,7 @@ public extension Http{
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
-            validate : [Http.Validate] = [.status(.const(200))],
+            validate : [Http.Validate] = [.status(.const())], /// default 200
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -157,7 +157,7 @@ public extension Http{
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 1,
-            validate : [Http.Validate] = [.status(.range(200..<300))],
+            validate : [Http.Validate] = [.status(.const())], /// default 200
             taskDelegate: ITaskDelegate? = nil
         ) async throws
         -> Http.Response<T> where T: Decodable
@@ -178,7 +178,7 @@ public extension Http{
         public func send<T>(
             with request : URLRequest,
             retry strategy : RetryService.Strategy = .exponential(),
-            _ validate : [Http.Validate] = [.status(.const(200))],
+            _ validate : [Http.Validate] = [.status(.const())], /// default 200
             _ taskDelegate: ITaskDelegate? = nil
         ) async throws -> Http.Response<T> where T : Decodable
         {
