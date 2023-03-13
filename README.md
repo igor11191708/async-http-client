@@ -99,10 +99,17 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
 ```swift
         /// Send custom request based on the specific request instance
         /// - Parameters:
-        ///   - request: A URL load request that is independent of protocol or URL scheme
-        ///   - retry: ``RetryService.Strategy`` strategy Default value .exponential with 5 retry and duration 2.0
-        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set up diff combinations check out ``Http.Validate.Status``
-        ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
+        ///   - request: A URL load request that is independent of protocol
+        /// or URL scheme
+        ///   - retry: ``RetryService.Strategy`` strategy Default value
+        /// .exponential with 5 retry and duration 2.0
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For
+        /// status code like an  example Default value to validate
+        /// statusCode == 200 You can set up diff combinations check out
+        /// ``Http.Validate.Status``
+        ///   - taskDelegate: A protocol that defines methods that URL
+        /// session instances call on their delegates to handle task-level
+        /// events
         public func send<T>(
             with request : URLRequest,
             retry strategy : RetryService.Strategy = .exponential(),
