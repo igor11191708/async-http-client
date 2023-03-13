@@ -122,7 +122,7 @@ This package uses stand alone package providing retry policy. The service create
 
 ## Validate
 Is an array of different rules to check Data or URLResponse.
-Currently is implemented for status code. You can pass to the validate array different combinations to validate like for status code 200 and 202..<205
+Currently is implemented for validating status code.
 
 ### Status code
 | type | description |
@@ -133,14 +133,11 @@ Currently is implemented for status code. You can pass to the validate array dif
 
 #### By range
 ```swift
-
     try await http.get(path: path, validate: [.status(.range(200..<300))])
-
 ```
 
 #### By predicate
 ```swift
-
     let fn : (Int) -> Bool = { status in status == 201 }
     
     try await http.get(path: path, validate: [.status(.predicate(fn))])
