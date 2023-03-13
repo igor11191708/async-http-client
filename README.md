@@ -37,7 +37,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
    try await Http.Delete.from(url)
 ```
 
-Fast-track functions return **(Data, URLResponse)** if you need to validate statusCode you can use Check yout different trategies **Http.Validate.Status** to validate status code
+Fast-track functions return **(Data, URLResponse)** if you need to validate status code you can use check different strategies **Http.Validate.Status**
 
 ```swift
     /// - Throws: Http.Errors.status(response)
