@@ -40,11 +40,9 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 Fast-track functions return **(Data, URLResponse)** if you need to validate status code you can use check different strategies **Http.Validate.Status**
 
 ```swift
-    /// - Throws: Http.Errors.status(response)
-    public func validateStatus(
-        _ response : URLResponse, 
-        by : [Http.Validate.Status]
-    ) throws
+        let (data, response) = try await Http.Get.from(url)
+        let rule : [Http.Validate.Status] = [.range(200..<300)]
+        try validateStatus(response, by: rule)
 ```
 
 ## Extended track
