@@ -23,7 +23,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 
 ## 1. Use
 ```swift
-   try await Http.Get.from(url, retry: 5)
+   try await Http.Get.from(url, retry: 5, validate: [.status(200)])
 ```
 ```swift
    try await Http.Post.from(url, taskDelegate : TaskDelegate())

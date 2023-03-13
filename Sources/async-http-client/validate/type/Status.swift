@@ -26,6 +26,14 @@ public extension Http.Validate{
     }
 }
 
+/// A type that can be initialized with an integer literal.
+extension Http.Validate.Status: ExpressibleByIntegerLiteral {
+    /// Creates an instance initialized to the specified integer value.
+    public init(integerLiteral value: Int) {
+       self = .const(value)
+    }
+}
+
 public extension Http.Validate.Status{
     
     /// Validate status
