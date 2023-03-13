@@ -22,7 +22,6 @@ public extension Http.Validate{
         
         /// Validate by predicate func if you need some specific logic
         case predicate(Predicate)
-        
     }
 }
 
