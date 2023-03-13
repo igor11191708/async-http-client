@@ -143,6 +143,9 @@ Currently is implemented for validating status code.
     try await http.get(path: path, validate: [.status(.predicate(fn))])
 ```
 
+[Replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift)
+There's an example how to use it with a custom JSONReader and processing a custom response Error format
+
 # The concept
 
 * Proxy is defining a communication layer and responsible for exchanging data with data source. There might be Http proxy, File proxy etc or some flavors REST proxy, LongFile proxy.
@@ -172,4 +175,3 @@ To try it in the real environment. I suggest installing the basic NodeJS Express
 ## Used by packages
 
 [Replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift)
-There's an example how to use it with a custom JSONReader and processing a custom response Error format
