@@ -37,7 +37,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
    try await Http.Delete.from(url)
 ```
 
-Fast-track functions return **(Data, URLResponse)** if you need to validate status code you can use check different strategies **Http.Validate.Status**
+Fast-track functions return **(Data, URLResponse)** if you need to validate status code you can use **func** *validateStatus* check different strategies **Http.Validate.Status**
 
 ```swift
         let (data, response) = try await Http.Get.from(url)
@@ -113,7 +113,7 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
 
 ## Retry strategy
 
-This package uses stand alone package providing retry policy. The service creates sequence of the delays (nanoseconds) according to chosen strategy for more details foloe the link [retry service](https://github.com/The-Igor/retry-policy-service) 
+This package uses stand alone package providing retry policy. The service creates sequence of the delays (nanoseconds) according to chosen strategy for more details folow the link [retry service](https://github.com/The-Igor/retry-policy-service) 
 
 | type | description |
 | --- | --- |
