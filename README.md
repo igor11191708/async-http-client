@@ -43,7 +43,7 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
     /// - Throws: Http.Errors.status(response)
     public func validateStatus(
         _ response : URLResponse, 
-        by validate : [Http.Validate.Status]
+        by : [Http.Validate.Status]
     ) throws
 ```
 
