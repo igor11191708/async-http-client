@@ -10,7 +10,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 - [x] You have fast-track functions to make requests immediately by url or build the infrastructure configuration that suits you
 - [x] Stand alone package without any dependencies using just Apple's  facilities
 - [x] Set up amount of attempts(retry) with **"Exponential backoff"** or **"Constant backoff"** strategy if request fails. Exponential backoff is a strategy in which you increase the delays between retries. Constant backoff is a strategy when delay between retries is a constant value
-- [x] Different strategies to validate Data or URLResponse
+- [x] Different strategies to validate URLResponse
 - [x] Customizable for different requests schemes from classic **CRUD Rest** to what suits to you
 - [x] Customizable in terms of URLSession
 - [x] Customizable in terms of URLSessionTaskDelegate, URLSessionDelegate
@@ -121,7 +121,7 @@ This package uses stand alone package providing retry policy. The service create
 | exponential [default] | The strategy implements exponential backoff  |
 
 ## Validate
-Is an array of different rules to check Data or URLResponse.
+Is an array of different rules to check URLResponse.
 Currently is implemented for validating status code.
 
 ### Status code
