@@ -18,7 +18,7 @@ public extension Http{
 
 internal extension Http.Validate{
     
-    /// Check if validate status
+    /// Pick up status validate rule
     var isStatus : Status{
         switch(self){
             case .status(let rule) : return rule
@@ -29,7 +29,7 @@ internal extension Http.Validate{
 
 internal extension Collection where Element == Http.Validate{
     
-    /// Filter status validate fn
+    /// Pick up status validate rules
     /// - Returns: Set of fn to validate status
     func filterStatus() -> [Http.Validate.Status] {
         map{ $0.isStatus }
