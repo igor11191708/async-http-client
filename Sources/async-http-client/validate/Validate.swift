@@ -10,6 +10,7 @@ import Foundation
 public extension Http{
     
     /// Set of  rules for validating  Http client
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     enum Validate {
         /// Set of  rules for validating  HTTPURLResponse.statusCode
         case status(Status)
@@ -26,7 +27,7 @@ internal extension Http.Validate{
     }
 }
 
-
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 internal extension Collection where Element == Http.Validate{
     
     /// Pick up  rules for validating  HTTPURLResponse.statusCode
