@@ -192,7 +192,7 @@ public extension Http{
                 config.getSession
             )
             
-            try validateStatus(response, by : validate.pickStatusRules())
+            try validateStatus(response, by : validate.pickStatusRules(), with: data)
             
             let value: T = try reader.read(data: data)
             

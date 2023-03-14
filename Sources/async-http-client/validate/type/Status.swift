@@ -38,22 +38,22 @@ extension Http.Validate.Status: ExpressibleByIntegerLiteral {
 }
 
     // MARK: - API
-
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public extension Http.Validate.Status{
     
     /// Validate status
     /// - Parameter data: URLResponse
-    func validate(_ data : URLResponse) throws{
+    func validate(_ response : URLResponse, with data : Data?) throws{
         
-        guard let status = (data as? HTTPURLResponse)?.statusCode else{ return try err(nil, data) }
+        guard let status = (response as? HTTPURLResponse)?.statusCode else{ return try err(nil, response, with: data) }
         
         switch(self){
             case .const(let value):
-                if value != status {  try err(status, data) }
+                if value != status {  try err(status, response, with: data) }
             case .range(let value) :
-                if !value.contains(status) { try err(status, data) }
+                if !value.contains(status) { try err(status, response, with: data) }
             case .predicate(let fn):
-                if !fn(status) { try err(status, data) }
+                if !fn(status) { try err(status, response, with: data) }
         }
     }
 }
@@ -66,9 +66,12 @@ public extension Http.Validate.Status{
 ///   - validate: Set of func to validate status code
 /// - Throws: Http.Errors.status(response)
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public func validateStatus(_ response : URLResponse, by rule : Http.Validate.Status) throws{
-    
-    try rule.validate(response)
+public func validateStatus(
+    _ response : URLResponse,
+    by rule : Http.Validate.Status,
+    with data : Data? = nil
+) throws{
+    try rule.validate(response, with: data)
 }
 
 
@@ -78,15 +81,20 @@ public func validateStatus(_ response : URLResponse, by rule : Http.Validate.Sta
 ///   - validate: Set of func to validate status code
 /// - Throws: Http.Errors.status(response)
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public func validateStatus(_ response : URLResponse, by rules : [Http.Validate.Status]) throws{
-    
+public func validateStatus(
+    _ response : URLResponse,
+    by rules : [Http.Validate.Status],
+    with data : Data? = nil
+) throws {
     try rules.forEach{
-        try validateStatus(response, by: $0)
+        try validateStatus(response, by: $0, with: data)
     }
 }
 
 // MARK: - File private
 
-fileprivate func err(_ status: Int?, _ response : URLResponse) throws{
-    throw Http.Errors.status(status, response)
+fileprivate func err(
+    _ status: Int?, _ response : URLResponse, with data : Data?
+)throws{
+    throw Http.Errors.status(status, response, data)
 }

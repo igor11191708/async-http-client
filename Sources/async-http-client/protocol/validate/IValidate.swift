@@ -14,5 +14,5 @@ protocol IValidate{
     
     /// Validate
     /// - Parameter data: URLResponse
-    func validate(_ data : URLResponse) throws
+    func validate(_ response : URLResponse, with data : Data?) throws
 }
