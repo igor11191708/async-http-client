@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Http{
+public extension Http{
     
     enum Errors : Error{
         case status(Int?, URLResponse, Data?)
