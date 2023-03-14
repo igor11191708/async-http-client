@@ -148,7 +148,7 @@ Currently is implemented for validating status code.
     try await http.get(path: path, validate: [.status(.predicate(fn))])
 ```
 
-There's an example [replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift) how to use it with a custom JSONReader and processing a custom response Error format
+There's an example [replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift) how to use it with a custom response error format that has different format then the successful response
 
 # The concept
 
