@@ -41,7 +41,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : UInt = 1,
+            retry : UInt = 5,
             validate : [Http.Validate] = [.status(200)],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
@@ -51,9 +51,8 @@ public extension Http{
             let request = try buildURLRequest(
                 config.baseURL,
                 for: path, query: query, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry)
             
-            return try await send(with: request, retry: strategy, validate, taskDelegate)
+            return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
         /// POST request
@@ -68,7 +67,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : UInt = 1,
+            retry : UInt = 5,
             validate : [Http.Validate] = [.status(200)],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
@@ -76,8 +75,8 @@ public extension Http{
         {
             let request = try buildURLRequest(config.baseURL,
                 for: path, method: .post, query: query, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry)
-            return try await send(with: request, retry: strategy, validate, taskDelegate)
+
+            return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
         /// POST request
@@ -94,7 +93,7 @@ public extension Http{
             body : V? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : UInt = 1,
+            retry : UInt = 5,
             validate : [Http.Validate] = [.status(200)],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
@@ -104,10 +103,8 @@ public extension Http{
             let request = try buildURLRequest(
                 config.baseURL,
                 for: path, method: .post, query: query, body: body, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry)
-
             
-            return try await send(with: request, retry: strategy, validate, taskDelegate)
+            return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
         /// PUT request
@@ -124,7 +121,7 @@ public extension Http{
             body : V? = nil,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : UInt = 1,
+            retry : UInt = 5,
             validate : [Http.Validate] = [.status(200)],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
@@ -134,14 +131,13 @@ public extension Http{
             var request = try buildURLRequest(
                 config.baseURL,
                 for: path, method: .put, query: query, body: body, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry)
             
             if hasNotContentType(config.getSession, request){
                 let content = config.defaultContentType
                 request.setValue(content, forHTTPHeaderField: "Content-Type") // for PUT
             }
             
-            return try await send(with: request, retry: strategy, validate, taskDelegate)
+            return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
         /// DELETE request
@@ -156,7 +152,7 @@ public extension Http{
             path: String,
             query : Query? = nil,
             headers : Headers? = nil,
-            retry : UInt = 1,
+            retry : UInt = 5,
             validate : [Http.Validate] = [.status(200)],
             taskDelegate: ITaskDelegate? = nil
         ) async throws
@@ -165,8 +161,8 @@ public extension Http{
             let request = try buildURLRequest(
                 config.baseURL,
                 for: path, method: .delete, query: query, headers: headers)
-            let strategy = RetryService.Strategy.exponential(retry: retry)
-            return try await send(with: request, retry: strategy, validate, taskDelegate)
+
+            return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
         /// Send custom request based on the specific request instance
@@ -213,3 +209,7 @@ fileprivate func hasNotContentType(_ session : URLSession,_ request : URLRequest
     session.configuration.httpAdditionalHeaders?["Content-Type"] == nil
 }
 
+/// Get default strategy for retries
+fileprivate let strategy : (UInt) -> RetryService.Strategy = { retry in
+   .exponential(retry: retry)
+}
