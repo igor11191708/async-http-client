@@ -59,10 +59,10 @@ public extension Http.Validate.Status{
                 if !value.contains(status) { try err(status, response, with: data) }
             case .predicate(let fn):
                 if !fn(status) { try err(status, response, with: data) }
-        case .check(let checkFn):
-            if let error = checkFn(status, response, data){
-                throw error
-            }
+            case .check(let checkFn):
+                if let error = checkFn(status, response, data){
+                    throw error
+                }
         }
     }
 }
