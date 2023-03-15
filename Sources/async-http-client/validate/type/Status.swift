@@ -47,7 +47,9 @@ extension Http.Validate.Status: ExpressibleByIntegerLiteral {
 public extension Http.Validate.Status{
     
     /// Validate status
-    /// - Parameter data: URLResponse
+    /// - Parameters:
+    ///   - response: URLResponse
+    ///   - data: Received data
     func validate(_ response : URLResponse, with data : Data?) throws{
         
         guard let status = (response as? HTTPURLResponse)?.statusCode else{ return try err(nil, response, with: data) }
@@ -72,8 +74,9 @@ public extension Http.Validate.Status{
 /// Validate status
 /// - Parameters:
 ///   - response: URLResponse
-///   - validate: Set of func to validate status code
-/// - Throws: Http.Errors.status(response)
+///   - rules: A rule for validating ``Http.Validate.Status``
+///   - data: Received data
+/// - Throws: ``Http.Errors.status``
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public func validateStatus(
     _ response : URLResponse,
@@ -84,11 +87,13 @@ public func validateStatus(
 }
 
 
+
 /// Validate status
 /// - Parameters:
 ///   - response: URLResponse
-///   - validate: Set of func to validate status code
-/// - Throws: Http.Errors.status(response)
+///   - rules: rules for validating ``Http.Validate.Status``
+///   - data: Received data
+/// - Throws: ``Http.Errors.status``
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public func validateStatus(
     _ response : URLResponse,
