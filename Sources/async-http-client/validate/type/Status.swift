@@ -35,6 +35,7 @@ public extension Http.Validate{
 // MARK: - Life circle
 
 /// A type that can be initialized with an integer literal.
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension Http.Validate.Status: ExpressibleByIntegerLiteral {
     /// Creates an instance initialized to the specified integer value.
     public init(integerLiteral value: Int) {
@@ -69,7 +70,7 @@ public extension Http.Validate.Status{
     }
 }
 
-// MARK: - Public
+// MARK: - Public functional
 
 /// Validate status
 /// - Parameters:
