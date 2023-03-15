@@ -15,7 +15,7 @@ public extension Http.Validate{
         
         public typealias Predicate = (Int) -> Bool
         
-        public typealias ErrorFn = (Int, Data?) -> Error?
+        public typealias ErrorFn = (Int, URLResponse, Data?) -> Error?
         
         /// Validate by exact value
         case const(Int = 200)
@@ -60,7 +60,7 @@ public extension Http.Validate.Status{
             case .predicate(let fn):
                 if !fn(status) { try err(status, response, with: data) }
         case .check(let checkFn):
-            if let error = checkFn(status, data){
+            if let error = checkFn(status, response, data){
                 throw error
             }
         }
