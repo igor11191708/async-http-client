@@ -135,7 +135,7 @@ Currently is implemented for validating status code.
 | const(Int) [default] 200 | Validate by exact value  |
 | range(Range<Int>) [default] 200..<300 | Validate by range  |
 | predicate(Predicate) | Validate by predicate func if you need some specific processing logic |
-| check(ErrorFn) | Check status and emit custom error if status is not valid |
+| check(ErrorFn) | Check status and return custom error if status is not valid |
 #### By range
 ```swift
     try await http.get(path: path, validate: [.status(.range(200..<300))])
