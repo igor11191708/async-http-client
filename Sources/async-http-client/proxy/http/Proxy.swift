@@ -61,7 +61,7 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
-        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an example Default value to validate statusCode == 200 Check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
@@ -86,7 +86,7 @@ public extension Http{
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
-        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an  example Default value to validate statusCode == 200 You can set diff combinations check out ``Http.Validate.Status``
+        ///   - validate: Set of custom validate fun ``Http.Validate`` For status code like an example Default value to validate statusCode == 200 Check out ``Http.Validate.Status``
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T, V : Encodable>(
             path: String,
