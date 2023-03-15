@@ -15,7 +15,7 @@ public extension Http.Validate{
         
         public typealias Predicate = (Int) -> Bool
         
-        public typealias ErrorFn = (Int, URLResponse, Data?) -> Error?
+        public typealias ErrorFn =  @Sendable (Int, URLResponse, Data?) -> Error?
         
         /// Validate by exact value
         case const(Int = 200)

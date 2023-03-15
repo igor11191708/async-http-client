@@ -10,8 +10,7 @@ import retry_policy_service
 
 public extension Http{
     
-    struct Get{
-        
+    struct Get{        
         /// Get request
         /// - Parameters:
         ///   - url: Url
