@@ -26,7 +26,7 @@ public extension Http.Validate{
         /// Validate by predicate func if you need some specific logic
         case predicate(Predicate)
         
-        ///  Check status and emit error if status is not valid
+        ///  Check status and return custom error if status is not valid
         case check(ErrorFn)
     }
 }
