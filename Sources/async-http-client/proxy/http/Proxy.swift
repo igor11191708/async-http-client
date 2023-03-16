@@ -58,7 +58,6 @@ public extension Http{
         /// POST request
         /// - Parameters:
         ///   - path: Path
-        ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
