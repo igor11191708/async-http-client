@@ -77,7 +77,7 @@ public extension Http{
         {
             let request = try buildURLRequest(
                 config.baseURL,
-                for: path, method: .post, query: query,  headers: headers)
+                for: path, method: .post, query: query, headers: headers)
             
             return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
