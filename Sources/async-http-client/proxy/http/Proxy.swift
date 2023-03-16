@@ -66,7 +66,6 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
-            body : EmptyBody = EmptyBody(),
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 5,
@@ -215,9 +214,4 @@ fileprivate func hasNotContentType(_ session : URLSession,_ request : URLRequest
 /// Get default strategy for retries
 fileprivate let strategy : (UInt) -> RetryService.Strategy = { retry in
    .exponential(retry: retry)
-}
-
-/// For POST requests with empty body
-public struct EmptyBody: Encodable, Equatable {
-    public init(){}
 }
