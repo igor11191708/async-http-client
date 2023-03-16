@@ -58,6 +58,7 @@ public extension Http{
         /// POST request
         /// - Parameters:
         ///   - path: Path
+        ///   - body: The data sent as the message body of a request, such as for an HTTP POST or PUT requests
         ///   - query: An array of name-value pairs
         ///   - headers: A dictionary containing all of the HTTP header fields for a request
         ///   - retry: Amount of attempts Default value .exponential with 5 retry and duration 2.0
@@ -65,6 +66,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T>(
             path: String,
+            body : EmptyBody = EmptyBody(),
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 5,
@@ -73,9 +75,10 @@ public extension Http{
         ) async throws
         -> Http.Response<T> where T: Decodable
         {
-            let request = try buildURLRequest(config.baseURL,
-                for: path, method: .post, query: query, headers: headers)
-
+            let request = try buildURLRequest(
+                config.baseURL,
+                for: path, method: .post, query: query,  headers: headers)
+            
             return try await send(with: request, retry: strategy(retry), validate, taskDelegate)
         }
         
@@ -90,7 +93,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func post<T, V : Encodable>(
             path: String,
-            body : V? = nil,
+            body : V,
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 5,
@@ -118,7 +121,7 @@ public extension Http{
         ///   - taskDelegate: A protocol that defines methods that URL session instances call on their delegates to handle task-level events
         public func put<T, V : Encodable>(
             path: String,
-            body : V? = nil,
+            body : V,
             query : Query? = nil,
             headers : Headers? = nil,
             retry : UInt = 5,
@@ -212,4 +215,9 @@ fileprivate func hasNotContentType(_ session : URLSession,_ request : URLRequest
 /// Get default strategy for retries
 fileprivate let strategy : (UInt) -> RetryService.Strategy = { retry in
    .exponential(retry: retry)
+}
+
+/// For POST requests with empty body
+public struct EmptyBody: Encodable, Equatable {
+    public init(){}
 }
