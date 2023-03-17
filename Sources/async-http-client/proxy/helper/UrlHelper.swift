@@ -13,7 +13,7 @@ import retry_policy_service
 ///   - url:  url
 ///   - query: An array of name-value pairs
 /// - Returns: A value that identifies the location of a resource
-internal func append(_ url: URL,with query : Http.Query? = nil) throws -> URL{
+internal func append(_ url: URL, with query : Http.Query? = nil) throws -> URL{
     
     guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true)else{
         throw URLError(.badURL)
