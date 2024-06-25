@@ -85,7 +85,7 @@ public extension Http.Configuration where R == JsonReader, W == JsonWriter {
     
     /// Create configuration by base url
     /// URLSession is URLSession.shared
-    ///  Reader amd Writer for Json format
+    ///  Reader and Writer for Json format
     /// - Parameter baseURL: Base url
     init(baseURL: URL) {
         self.reader = JsonReader()
