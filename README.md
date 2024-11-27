@@ -9,8 +9,7 @@ or
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
 - Go to Product > Build Documentation or **⌃⇧⌘ D**
 
-## SwiftUI example
-[Async http client example](https://github.com/igor11191708/async-http-client-example)
+## [SwiftUI example](https://github.com/igor11191708/async-http-client-example)
 
 ## Features
 - [x] Multiplatform
