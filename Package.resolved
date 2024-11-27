@@ -3,7 +3,7 @@
     {
       "identity" : "retry-policy-service",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/The-Igor/retry-policy-service.git",
+      "location" : "https://github.com/igor11191708/retry-policy-service.git",
       "state" : {
         "revision" : "2a6a1f057fbf77337dfc73db98bd3d538127b3e2",
         "version" : "1.0.1"
