@@ -4,6 +4,14 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Figor11191708%2Fasync-http-client%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/igor11191708/async-http-client)
 
+## [Documentation(API)](https://swiftpackageindex.com/igor11191708/async-http-client/main/documentation/async_http_client)
+or
+- You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
+- Go to Product > Build Documentation or **⌃⇧⌘ D**
+
+## SwiftUI example
+[Async http client example](https://github.com/igor11191708/async-http-client-example)
+
 ## Features
 - [x] Multiplatform
 - [x] You have fast-track functions to make requests immediately by url or build the infrastructure configuration that suits you
@@ -16,7 +24,7 @@ Network layer for running requests like GET, POST, PUT, DELETE etc customizable 
 - [x] Based on interfaces not implementations
 - [x] Customizable with coders You can easily change format from json to xml or text just changing the coder
 
- ![Http requests](https://github.com/The-Igor/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
+ ![Http requests](https://github.com/igor11191708/async-http-client-example/blob/main/async-http-client-example/img/image11.gif) 
 
 ## Fast track
 
@@ -117,7 +125,7 @@ Fast-track functions return **(Data, URLResponse)** if you need to validate stat
 
 ## Retry strategy
 
-This package uses stand alone package providing retry policy. The service creates sequence of the delays (nanoseconds) according to chosen strategy for more details folow the link [retry service](https://github.com/The-Igor/retry-policy-service) 
+This package uses stand alone package providing retry policy. The service creates sequence of the delays (nanoseconds) according to chosen strategy for more details folow the link [retry service](https://github.com/igor11191708/retry-policy-service) 
 
 | type | description |
 | --- | --- |
@@ -147,14 +155,14 @@ Currently is implemented for validating status code.
     try await http.get(path: path, validate: [.status(.predicate(fn))])
 ```
 
-There's an example [replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift) how to use it with a custom response error format that has different format then the successful response
+There's an example [replicate toolkit for swift](https://github.com/igor11191708/replicate-kit-swift) how to use it with a custom response error format that has different format then the successful response
 
 # The concept
 
 * Proxy is defining a communication layer and responsible for exchanging data with data source. There might be Http proxy, File proxy etc or some flavors REST proxy, LongFile proxy.
 * Reader and Writer are used to interpret data.
 
- ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 
+ ![The concept](https://github.com/igor11191708/async-http-client/blob/main/img/concept.png) 
  
 
 ## Try it in the real environment
@@ -162,19 +170,12 @@ There's an example [replicate toolkit for swift](https://github.com/The-Igor/rep
 
 To try it in the real environment. I suggest installing the basic NodeJS Express boilerplate. Take a look on the video snippet how easy it is to get it through Webstorm that is accessible for free for a trial period.
 
-[![Server installation (NodeJS Express)](https://github.com/The-Igor/d3-network-service/blob/main/img/server_install.png)](https://youtu.be/9FPOYHzcE7A)
+[![Server installation (NodeJS Express)](https://github.com/igor11191708/d3-network-service/blob/main/img/server_install.png)](https://youtu.be/9FPOYHzcE7A)
 
 - Get [**WebStorm Early Access**](https://www.jetbrains.com/webstorm/nextversion)
-- Get [**index.js**](https://github.com/The-Igor/d3-network-service/blob/main/js/index.js) file from here and replace it with the one in the boilerplate and launch the server.
+- Get [**index.js**](https://github.com/igor11191708/d3-network-service/blob/main/js/index.js) file from here and replace it with the one in the boilerplate and launch the server.
 
-## Documentation(API)
-- You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
-- Go to Product > Build Documentation or **⌃⇧⌘ D**
-
-## SwiftUI example for the package
-
-[Async http client example](https://github.com/The-Igor/async-http-client-example)
 
 ## Used by packages
 
-[Replicate toolkit for swift](https://github.com/The-Igor/replicate-kit-swift)
+[Replicate toolkit for swift](https://github.com/igor11191708/replicate-kit-swift)
